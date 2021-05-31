@@ -1,0 +1,23 @@
+# These are config values that users can set from the GUI or the commandline
+options:
+  HASURA_DOCKER_TAG:
+    type: string
+    default: "latest"
+    description: >
+      This charm pulls the Docker image for Hasura from Docker Hub. This
+      required setting sets the Tag to be used when deploying this charm. Any
+      valid tag which is defined in Docker Hub in the official Hasura repo,
+      can be provided here. By default the 'latest' tag will be used.
+      Official repo: https://hub.docker.com/r/hasura/graphql-engine
+  HASURA_ADMIN_SECRET:
+    type: string
+    default: ""
+    description: >
+      Using this secret, this option gives admin access to your Hasura 
+      instance.
+  HASURA_ENABLE_CONSOLE:
+    type: boolean
+    default: "false"
+    description: >
+      Optionally enable the Hasura Console which is a modified Graphiql interface
+      that allows an authenticated user to access the Hasura instance.
