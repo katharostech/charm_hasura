@@ -52,22 +52,26 @@ delete_pgsql_kv_data () {
 # Convention found here: https://discourse.jujucharms.com/t/interface-http/2392
 set_http_relation () {
   # Get the port from the KV store
+  app_host=$(lucky private-address)
   app_port=$(lucky kv get bind_port)
 
-  # Publish the Hasura listen address to the relation
-  lucky relation set "hostname=$(lucky private-address)"
-  lucky relation set "port=${app_port}"
+  # Publish the Hasura endpoint info for all relations
+  for relation_id in $(lucky relation list-ids --relation-name graphql); do
+    lucky relation set --relation-id ${relation_id} \
+      "hostname=${app_host}"
+    lucky relation set --relation_id ${relation_id} \
+      "port=${app_port}"
+    lucky relation set --relation_id ${relation_id} \
+      "gql_uri=/v1/graphql"
+  done
 }
 
 # function to remove the listen_address
 remove_http_relation () {
-  log_this \
-    "Removing relation value for 'hostname': $(lucky relation get hostname)"
-  lucky relation set hostname=""
-  log_this \
-    "Removing relation value for 'port': $(lucky relation get port)"
-  lucky relation set port=""
-  log_this "hostname and port relation values removed"
+  for relation_id in $(lucky relation list_ids --relation-name graphql); do
+    lucky relation set --relation-id ${relation_id} hostname=""
+    lucky relation set --relation-id ${relation_id} port=""
+  done
 }
 
 # Get random port if not set

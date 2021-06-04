@@ -13,9 +13,9 @@ tags:
 series:
   - focal
 provides:
-  website:
+  graphql:
     interface: http
 requires:
   db:
-    interface: pgsql
+    interface: ez-pgsql
 subordinate: false

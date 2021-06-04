@@ -15,6 +15,13 @@ options:
     description: >
       Using this secret, this option gives admin access to your Hasura 
       instance.
+  HASURA_GRAPHQL_JWT_SECRET:
+    type: string
+    default: ""
+    description: >
+      Enable the JWT workflow with this option. The value should be a JSON formatted string.
+      An example value would be as follows: 
+      '{"jwk_url":"http://host.docker.internal:8085/auth/realms/my-realm/protocol/openid-connect/certs", "claims_namespace_path":"hasura_claims", "claims_format":"json"}'
   HASURA_ENABLE_CONSOLE:
     type: boolean
     default: "false"

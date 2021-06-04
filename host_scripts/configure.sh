@@ -26,6 +26,7 @@ if [ -z $hstag ]; then lucky set-status -n config-status blocked \
   "Config required: 'HASURA_DOCKER_TAG'"; exit 0; 
 fi
 hssecret=$(lucky get-config HASURA_ADMIN_SECRET)
+hsjwtsecret=$(lucky get-config HASURA_GRAPHQL_JWT_SECRET)
 hsconsole=$(lucky get-config HASURA_ENABLE_CONSOLE)
 
 
@@ -51,6 +52,9 @@ lucky container env set \
 # Set optional variables
 if [ -n ${hssecret} ]; then
   lucky container env set "HASURA_GRAPHQL_ADMIN_SECRET=${hssecret}"
+fi
+if [ -n ${hsjwtsecret} ]; then
+  lucky container env set "HASURA_GRAPHQL_JWT_SECRET=${hsjwtsecret}"
 fi
 if [ "${hsconsole}" == "true" ]; then
   lucky container env set "HASURA_GRAPHQL_ENABLE_CONSOLE=true"

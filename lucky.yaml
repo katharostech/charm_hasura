@@ -20,11 +20,11 @@ hooks:
     - host-script: pgsql_relations.sh
   db-relation-broken:
     - host-script: pgsql_relations.sh
-  website-relation-joined:
-    - host-script: website_relations.sh
-  website-relation-changed:
-    - host-script: website_relations.sh
-  website-relation-departed:
-    - host-script: website_relations.sh
-  website-relation-broken:
-    - host-script: website_relations.sh
+  graphql-relation-joined:
+    - host-script: graphql_relations.sh
+  graphql-relation-changed:
+    - host-script: graphql_relations.sh
+  graphql-relation-departed:
+    - host-script: graphql_relations.sh
+  graphql-relation-broken:
+    - host-script: graphql_relations.sh
